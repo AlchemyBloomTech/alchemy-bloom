@@ -1,5 +1,6 @@
 package com.inbloom.blossom.controller;
 
+import com.inbloom.blossom.dto.ReflectionUploadRequest;
 import com.inbloom.blossom.model.Reflection;
 import com.inbloom.blossom.service.BaseService;
 import lombok.RequiredArgsConstructor;
@@ -37,22 +38,21 @@ public class ReflectionController {
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> uploadReflection(@RequestParam String name,
-                                                   @RequestParam String description,
-                                                   @RequestParam MultipartFile image) {
+    public ResponseEntity<String> uploadReflection(@ModelAttribute ReflectionUploadRequest request) {
         try {
             String uploadDir = "uploads/images/";
             Files.createDirectories(Paths.get(uploadDir));
 
+            MultipartFile image = request.getImage();
             String filename = UUID.randomUUID() + "_" + image.getOriginalFilename();
             Path filepath = Paths.get(uploadDir, filename);
             Files.write(filepath, image.getBytes());
 
-            log.info("Uploading reflection with name: {}", name);
+            log.info("Uploading reflection with name: {}", request.getName());
             Reflection reflection = new Reflection();
-            reflection.setName(name);
-            reflection.setDescription(description);
-            reflection.setImageUrl("/images/" + filename); // Assuming imageUrl is a file path or URL
+            reflection.setName(request.getName());
+            reflection.setDescription(request.getDescription());
+            reflection.setImagePath("/images/" + filename); // Assuming imageUrl is a file path or URL
             homeEntryService.saveReflection(reflection); // Assuming a save method exists in the service
             return ResponseEntity.ok("Reflection uploaded successfully");
         } catch (IOException e) {
