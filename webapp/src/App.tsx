@@ -9,9 +9,9 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Header />
-      <main className="flex-grow">
-          <ReflectionsGallery />
-      </main>
+          <main className="flex-grow">
+              <ReflectionsGallery />
+          </main>
       <Footer />
     </div>
   );
