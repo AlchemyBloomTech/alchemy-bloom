@@ -19,7 +19,7 @@ import java.nio.file.Paths;
 @RequestMapping("/api/images")
 public class ImageController {
 
-    private final String uploadDir = "uploads/art/";
+    private final String uploadDir = "uploads/images/";
 
     @GetMapping("/{filename:.+}")
     public ResponseEntity<Resource> serveImage(@PathVariable String filename) {
