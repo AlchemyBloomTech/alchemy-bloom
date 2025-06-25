@@ -27,7 +27,7 @@ public class Reflection {
     private String imageUrl;
 
     public String getImageUrl() {
-        if (imagePath == null) return null;
-        return "http://localhost:8080" + imagePath;
+        return imagePath;  // e.g. "/images/awakening_pt1.jpg"
     }
+
 }
