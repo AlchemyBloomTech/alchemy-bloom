@@ -29,9 +29,20 @@ COPY --from=backend-builder /app/target/*.jar app.jar
 # Copy React build
 COPY --from=frontend-builder /app/webapp/build /app/static
 
+USER root
+
+RUN apt-get update && apt-get install -y sqlite3 && rm -rf /var/lib/apt/lists/*
+
+USER 1000
+
+
 # COPY your SQLite database file into the image
-COPY src/main/resources/db/mydatabase.db /app/data/mydatabase.db
+COPY src/main/resources/db/mydatabase.db /data/mydatabase.db
+
 
 EXPOSE 8080
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
+RUN mkdir -p /data
+
