@@ -1,4 +1,4 @@
-# Stage 1:Build React frontend
+# Stage 1: Build React frontend
 FROM node:18-alpine AS frontend-builder
 
 WORKDIR /app/webapp
@@ -9,7 +9,7 @@ RUN npm install
 COPY webapp/ ./
 RUN npm run build
 
-#Stage 2: Build Spring Boot backend
+# Stage 2: Build Spring Boot backend
 FROM maven:3.9.6-eclipse-temurin-17-alpine AS backend-builder
 
 WORKDIR /app
@@ -23,9 +23,14 @@ RUN mvn clean package -DskipTests
 FROM openjdk:17-jdk-slim
 WORKDIR /app
 
-COPY --from=backend-builder app/target/*.jar app.jar
-#Copy React build into static scan folder
+# Copy Spring Boot jar
+COPY --from=backend-builder /app/target/*.jar app.jar
+
+# Copy React build
 COPY --from=frontend-builder /app/webapp/build /app/static
+
+# COPY your SQLite database file into the image
+COPY src/main/resources/db/mydatabase.db /app/data/mydatabase.db
 
 EXPOSE 8080
 
