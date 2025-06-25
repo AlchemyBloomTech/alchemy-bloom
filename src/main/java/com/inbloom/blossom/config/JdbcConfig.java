@@ -12,7 +12,7 @@ public class JdbcConfig {
     @Bean
     public DataSource dataSource() {
         return new org.sqlite.SQLiteDataSource() {{
-            setUrl("jdbc:sqlite:mydatabase.db");
+            setUrl("jdbc:sqlite:/data/mydatabase.db");
         }};
     }
 
