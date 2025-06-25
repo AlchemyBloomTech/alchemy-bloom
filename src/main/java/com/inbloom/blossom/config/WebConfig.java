@@ -11,14 +11,15 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/images/**")
-                .addResourceLocations("file:uploads/images/");
+        registry.addResourceHandler("/uploads/images/**")
+                .addResourceLocations("classpath:/static/uploads/images/");
     }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000")  // React dev server origin
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
+        registry.addMapping("/uploads/images/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET", "OPTIONS");
+
     }
 }
