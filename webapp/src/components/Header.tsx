@@ -7,6 +7,10 @@ const Header: React.FC = () => (
          Alchemy inBloom
        </h1>
        <p className="text-md text-gray-600 font-light italic max-w-md text-center">
+<<<<<<< HEAD
+=======
+         Inspired by the beauty and mystery of the Catholic Church.
+>>>>>>> origin/main
          A sacred space for reflection, healing, and transformation
        </p>
      </div>

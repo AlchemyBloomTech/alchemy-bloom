@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  alchemy-backend:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - db_data:/app/data
+      - uploads:/app/uploads/images
+    environment:
+      - DB_PATH=/app/data/mydatabase.db
+
+volumes:
+  db_data:
+  uploads:
