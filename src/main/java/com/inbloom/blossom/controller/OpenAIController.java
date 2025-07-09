@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -22,13 +23,21 @@ public class OpenAIController {
 
 
     @PostMapping("/chat")
-    public ResponseEntity<String> chat(@RequestBody Map<String, String> payload) {
+    public ResponseEntity<Map<String, String>> chat(@RequestBody Map<String, String> payload) {
         String prompt = payload.get("prompt");
         if (prompt == null || prompt.isEmpty()) {
-            return ResponseEntity.badRequest().body("Prompt is required");
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "Prompt is required");
+            return ResponseEntity.badRequest().body(error);
         }
-        String response = openAIService.askAlchemy(prompt);
+
+        String reply = openAIService.askAlchemy(prompt);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("response", reply); // ✅ match frontend expectation
+
         return ResponseEntity.ok(response);
+
     }
 
 }
