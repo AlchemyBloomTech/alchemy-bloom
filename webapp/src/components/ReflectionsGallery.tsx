@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/main
 type Reflection = {
   id: number;
   name: string;
