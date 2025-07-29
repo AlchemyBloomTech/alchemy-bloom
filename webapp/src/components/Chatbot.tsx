@@ -42,46 +42,45 @@ const Chatbot: React.FC = () => {
     setInput(e.target.value);
   };
 
-  return (
-    <div className="w-full max-w-md h-[80vh] sm:h-[90vh] mx-auto bg-white/80 backdrop-blur-md border border-white/30 rounded-3xl shadow-xl p-4 flex flex-col space-y-3">
+   return (
+      <div className="flex flex-col h-full p-4 space-y-3">
+        <div className="flex items-center space-x-2">
+          <Sparkles className="text-yellow-500" />
+          <h2 className="text-xl font-semibold text-gray-800">AlchemyAI</h2>
+        </div>
 
-      <div className="flex items-center space-x-2">
-        <Sparkles className="text-yellow-500" />
-        <h2 className="text-xl font-semibold text-gray-800">AlchemyAI</h2>
-      </div>
+        <div className="flex-grow overflow-y-auto space-y-2 px-1">
+          {messages.map((msg, i) => (
+            <div
+              key={i}
+              className={`rounded-xl px-4 py-2 max-w-xs ${
+                msg.sender === 'user'
+                  ? 'bg-blue-100 self-end text-right text-blue-900'
+                  : 'bg-purple-100 self-start text-purple-900'
+              }`}
+            >
+              {msg.text}
+            </div>
+          ))}
+        </div>
 
-      <div className="overflow-y-auto flex-grow space-y-2 px-1">
-        {messages.map((msg, i) => (
-          <div
-            key={i}
-            className={`rounded-xl px-4 py-2 max-w-xs ${
-              msg.sender === 'user'
-                ? 'bg-blue-100 self-end text-right text-blue-900'
-                : 'bg-purple-100 self-start text-purple-900'
-            }`}
+        <form onSubmit={handleSubmit} className="flex gap-2">
+          <input
+            type="text"
+            value={input}
+            onChange={handleChange}
+            placeholder="Ask the Chatbot..."
+            className="flex-grow rounded-xl px-3 py-2 border focus:outline-none focus:ring focus:ring-purple-300 text-sm"
+          />
+          <button
+            type="submit"
+            className="bg-gradient-to-r from-purple-400 to-purple-600 text-white px-4 py-2 rounded-xl text-sm hover:opacity-90"
           >
-            {msg.text}
-          </div>
-        ))}
+            Send
+          </button>
+        </form>
       </div>
-
-      <form onSubmit={handleSubmit} className="flex gap-2">
-        <input
-          type="text"
-          value={input}
-          onChange={handleChange}
-          placeholder="Ask the Chatbot..."
-          className="flex-grow rounded-xl px-3 py-2 border focus:outline-none focus:ring focus:ring-purple-300 text-sm"
-        />
-        <button
-          type="submit"
-          className="bg-gradient-to-r from-purple-400 to-purple-600 text-white px-4 py-2 rounded-xl text-sm hover:opacity-90"
-        >
-          Send
-        </button>
-      </form>
-    </div>
-  );
+    );
 };
 
 export default Chatbot;
