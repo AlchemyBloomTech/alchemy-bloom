@@ -7,20 +7,39 @@ import './App.css';
 
 function App() {
   return (
-    <>
-      <div className="min-h-screen flex flex-col bg-white">
-        <Header />
-        <main className="flex-grow">
-          <ReflectionsGallery />
-        </main>
-        <Footer />
-      </div>
+      <>
+        <div className="min-h-screen flex flex-col bg-white">
+          <Header />
+          <main className="flex-grow">
+            <ReflectionsGallery />
+          </main>
+          <Footer />
+        </div>
 
-      <div className="fixed top-20 right-4 z-50">
-        <Chatbot />
-      </div>
-    </>
-  );
+        <div
+          className="
+            fixed
+            right-4
+            top-20
+            bottom-4
+            z-50
+            w-[90vw] max-w-md
+            sm:w-80
+            rounded-xl
+            shadow-lg
+            bg-white/45
+            backdrop-blur-md
+            overflow-hidden
+            flex
+            flex-col
+            max-h-[80vh]
+            sm:max-h-[600px]
+          "
+        >
+          <Chatbot />
+        </div>
+      </>
+    );
 }
 
 export default App;
