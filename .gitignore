@@ -46,3 +46,4 @@ build/
 # Optional: ignore uploads if you don’t want them tracked
 /uploads/
 /src/main/resources/templates/.env.backup
+/src/main/resources/templates/.env
